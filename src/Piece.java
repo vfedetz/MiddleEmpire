@@ -18,8 +18,7 @@ public class Piece {
 	// Instance variables
 	private int color;
 	private int type;
-	private int x;
-	private int y;
+	private Space space;
 
 	/**
 	 * Constructor for Piece
@@ -28,11 +27,10 @@ public class Piece {
 	 * @param myX
 	 * @param myY
 	 */
-	public Piece(int myColor, int myType, int myX, int myY) {
-		this.color = myColor;
-		this.type = myType;
-		this.x = myX;
-		this.y = myY;
+	public Piece(int myColor, int myType, Space mySpace) {
+		color = myColor;
+		type = myType;
+		space = mySpace;
 	}
 	
 	/**
@@ -80,28 +78,12 @@ public class Piece {
 	}
 
 	public int getX() {
-		return x;
+		return space.getX();
 	}
 
 	public int getY() {
-		return y;
-	}
-
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	public int getWidth() {
-		return this.getImage().getHeight(null);
-	}
-
-	public int getHeight() {
-		return this.getImage().getHeight(null);
-	}
+		return space.getY();
+	}		
 	
 	public int getColor() {
 		return color;

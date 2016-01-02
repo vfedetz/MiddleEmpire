@@ -1,9 +1,17 @@
+import java.awt.Image;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
 
 public class Space {
 	
 	// Space type Constants
 	public final static int CITY = 0;
-	public final static int PATHWAY = 1;	
+	public final static int PATHWAY = 1;
+	
+	// Space size Constanats
+	public static final int SPACE_SIZE_X = 50;
+	public static final int SPACE_SIZE_Y = 50;
 	
 	// Instance variables
 	private int type; // the type of space ie "city" or "pathway"
@@ -60,6 +68,40 @@ public class Space {
 	
 	public int getY() {
 		return y;
+	}
+	
+	public Image getImage(){
+		if (isEmpty()) {
+			// this image represent an empty space
+			URL urlEmptyImg = getClass().getResource("/img/empty.png");		
+		    return new ImageIcon(urlEmptyImg).getImage(); 
+		}
+		else {
+			return piece.getImage();
+		}
+	}
+	
+	public int getHeight() {
+		return SPACE_SIZE_X;
+	}
+	
+	public int getWidth() {
+		return SPACE_SIZE_Y;
+	}
+	
+	public Piece getPiece() {
+		return piece;
+	}
+	
+	public void printSpace() {
+		String output = "I am a Space with x=" + x + " y=" + y + " type=" + type;
+		if (this.isEmpty()) {
+			output = output + " ... and I am currently empty";
+		}
+		else {
+			output = output + " ... and I am currently filled with a " + piece.getColor() + " " + piece.getType() + " piece";
+		}
+		System.out.println(output);
 	}
 	
 	public Space[] adjacentSpaces() {

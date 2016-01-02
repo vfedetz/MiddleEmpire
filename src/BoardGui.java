@@ -20,44 +20,49 @@ public class BoardGui extends JPanel {
 	// Board Constants
 	private static final int BOARD_START_X = 301;
 	private static final int BOARD_START_Y = 51;
-	private static final int TILE_OFFSET_X = 50;
-	private static final int TILE_OFFSET_Y = 50;
 
 	// Instance variables
 	private Image imgBackground;
-	private List<Piece> pieces = new ArrayList<Piece>();
 	private List<Deck> decks = new ArrayList<Deck>(); // should only ever be 3 decks
 	private List<Space> spaces = new ArrayList<Space>();
 
-	
+	/**
+	 * Constructor for the BoardGui class
+	 * This will load and place the background image, the spaces, pieces, and decks... as well as initialize all the input listeners and JPanels etc
+	 */
 	public BoardGui() {
 		// load and set background image
 		URL urlBackgroundImg = getClass().getResource("/img/board.png");
 		this.imgBackground = new ImageIcon(urlBackgroundImg).getImage();
 
+		// ----
+		
 		// create and place decks
 		createAndAddDeck(Deck.ATK, 0, 0);
 		
+		// ----
+		
 		// create spaces
-		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 0, BOARD_START_Y + TILE_OFFSET_Y * 0);
-		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 1, BOARD_START_Y + TILE_OFFSET_Y * 1);
-		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 2, BOARD_START_Y + TILE_OFFSET_Y * 2);
-		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 3, BOARD_START_Y + TILE_OFFSET_Y * 3);
+		// creating a 4 x 4 grid of cities for developing ONLY. Eventually these spaces must map to the cities/pathways on the background image
+		for (int y = 0; y < 4; y++) {
+			for (int x = 0; x < 4; x++) {
+				createAndAddSpace(Space.CITY, BOARD_START_X + Space.SPACE_SIZE_X * x, BOARD_START_Y + Space.SPACE_SIZE_Y * y);				
+			}
+		}
+
+		// ----
 		
 		// create and place pieces
-		createAndAddPiece(Piece.COLOR_BLACK, Piece.TYPE_ROAD, BOARD_START_X + TILE_OFFSET_X * 0,
-				BOARD_START_Y + TILE_OFFSET_Y * 0);
-		createAndAddPiece(Piece.COLOR_WHITE, Piece.TYPE_EMPIRE, BOARD_START_X + TILE_OFFSET_X * 1,
-				BOARD_START_Y + TILE_OFFSET_Y * 0);
-		createAndAddPiece(Piece.COLOR_RED, Piece.TYPE_STRONGHOLD, BOARD_START_X + TILE_OFFSET_X * 2,
-				BOARD_START_Y + TILE_OFFSET_Y * 0);
-		createAndAddPiece(Piece.COLOR_GREEN, Piece.TYPE_WALL, BOARD_START_X + TILE_OFFSET_X * 3,
-				BOARD_START_Y + TILE_OFFSET_Y * 0);
+		createAndAddPiece(Piece.COLOR_BLACK, Piece.TYPE_ROAD, spaces.get(0));
+
+		// ----
 
 		// add mouse listeners to enable drag and drop
-		PiecesDragAndDropListener listener = new PiecesDragAndDropListener(this.pieces, this);
+		SpacesMouseClickListener listener = new SpacesMouseClickListener(this.spaces, this);
 		this.addMouseListener(listener);
 		this.addMouseMotionListener(listener);
+		
+		// ----
 
 		// create application frame and set visible
 		JFrame f = new JFrame();
@@ -80,10 +85,9 @@ public class BoardGui extends JPanel {
 	 * @param y
 	 *            y position of upper left corner
 	 */
-	private void createAndAddPiece(int color, int type, int x, int y) {
-		
-		Piece piece = new Piece(color, type, x, y);
-		this.pieces.add(piece);
+	private void createAndAddPiece(int color, int type, Space space) {
+		Piece piece = new Piece(color, type, space);
+		space.addPiece(piece);
 	}
 	
 	private void createAndAddDeck(int type, int x, int y) {
@@ -95,18 +99,12 @@ public class BoardGui extends JPanel {
 		Space space = new Space(Space.CITY, x, y);
 		this.spaces.add(space);
 	}
-
-	/**
-	 * load image for given color and type. This method translates the color and
-	 * type information into a filename and loads that particular file.
-	 * 
-	 * @param color
-	 *            color constant
-	 * @param type
-	 *            type constant
-	 * @return image
-	 */
 	
+	public void printSpaces() {
+		for (Space space : this.spaces) {
+			space.printSpace();
+		}
+	}
 
 	
 	@Override
@@ -114,9 +112,9 @@ public class BoardGui extends JPanel {
 		// draw background
 		g.drawImage(this.imgBackground, 0, 0, null);
 		
-		// draw pieces
-		for (Piece piece : this.pieces) {
-			g.drawImage(piece.getImage(), piece.getX(), piece.getY(), null);
+		// draw spaces
+		for (Space space : this.spaces) {
+			g.drawImage(space.getImage(), space.getX(), space.getY(), null);
 		}
 		
 		// draw decks
@@ -147,8 +145,8 @@ public class BoardGui extends JPanel {
 		*/
 		 
 		// GUI Testing
-		new BoardGui();
-		
+		BoardGui b = new BoardGui();
+		b.printSpaces();
 	}
 
 }
