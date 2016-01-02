@@ -1,4 +1,7 @@
 import java.awt.Image;
+import java.net.URL;
+
+import javax.swing.ImageIcon;
 
 /**
  * An object of type Card represents a playing card from a standard Poker deck,
@@ -35,7 +38,6 @@ public class Card {
 	// instance variables
 	private final int type;
 	private final int subType;
-	private Image img;
 
 	/**
 	 * Creates a card with a specified type.
@@ -55,6 +57,65 @@ public class Card {
 		type = theType;
 	}
 
+	/**
+	 *  Loads the correct image for this card
+	 *  Note that we are not saving the image into an instance variable to save memory by only loading the image file when we need to draw it
+	 * @return
+	 */
+	private Image getImage() {
+		String filename = "";
+
+		switch (this.type) {
+		case Card.ATK:
+			filename += "ATK_";
+			break;
+		case Card.DEF:
+			filename += "DEF_";
+			break;
+		case Card.CON:
+			filename += "CON_";
+			break;
+		}
+
+		switch (this.subType) {
+		case Card.ATK_DOUBLE:
+			filename += "da";
+			break;
+		case Card.ATK_OPPONENT:
+			filename += "ao";
+			break;
+		case Card.ATK_REMOVEROAD:
+			filename += "rr";
+			break;
+		case Card.CON_BUILDANYSTR:
+			filename += "bas";
+			break;
+		case Card.CON_UPGRADESTR:
+			filename += "us";
+			break;
+		case Card.CON_BUILDSTR_ETHIOPIA:
+			filename += "bs_eth";
+			break;
+		case Card.DEF_BUILDROAD:
+			filename += "br";
+			break;
+		case Card.DEF_BUILDWALL:
+			filename += "bw";
+			break;
+		case Card.DEF_DEFEND:
+			filename += "da";
+			break;
+		case Card.DEF_PICK2:
+			filename += "p2";
+			break;
+		}
+
+		filename += ".png";
+		URL urlCardImg = getClass().getResource("/img/" + filename);
+		return new ImageIcon(urlCardImg).getImage();
+	}
+
+	
 	public int getType() {
 		return type;
 	}
@@ -92,10 +153,6 @@ public class Card {
 
 	public String toString() {
 		return getTypeAsString();
-	}
-
-	public Image getImage() {
-		return img;
 	}
 
 } // end class Card

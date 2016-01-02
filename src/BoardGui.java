@@ -75,8 +75,8 @@ public class BoardGui extends JPanel {
 	 *            y position of upper left corner
 	 */
 	private void createAndAddPiece(int color, int type, int x, int y) {
-		Image img = this.getImageForPiece(color, type);
-		Piece piece = new Piece(img, x, y);
+		
+		Piece piece = new Piece(color, type, x, y);
 		this.pieces.add(piece);
 	}
 	
@@ -95,99 +95,9 @@ public class BoardGui extends JPanel {
 	 *            type constant
 	 * @return image
 	 */
-	private Image getImageForPiece(int color, int type) {
-		String filename = "";
+	
 
-		switch (type) {
-		case Piece.TYPE_EMPIRE:
-			filename += "e";
-			break;
-		case Piece.TYPE_ROAD:
-			filename += "r";
-			break;
-		case Piece.TYPE_STRONGHOLD:
-			filename += "s";
-			break;
-		case Piece.TYPE_WALL:
-			filename += "w";
-			break;
-		}
-
-		switch (color) {
-		case Piece.COLOR_WHITE:
-			filename += "w";
-			break;
-		case Piece.COLOR_BLACK:
-			filename += "b";
-			break;
-		case Piece.COLOR_RED:
-			filename += "r";
-			break;
-		case Piece.COLOR_GREEN:
-			filename += "g";
-			break;
-		}
-
-		filename += ".png";
-
-		URL urlPieceImg = getClass().getResource("/img/" + filename);
-		return new ImageIcon(urlPieceImg).getImage();
-	}
-
-	private Image getImageForCard(int type, int subType) {
-		String filename = "";
-
-		switch (type) {
-		case Card.ATK:
-			filename += "ATK_";
-			break;
-		case Card.DEF:
-			filename += "DEF_";
-			break;
-		case Card.CON:
-			filename += "CON_";
-			break;
-		}
-
-		switch (subType) {
-		case Card.ATK_DOUBLE:
-			filename += "ad";
-			break;
-		case Card.ATK_OPPONENT:
-			filename += "ao";
-			break;
-		case Card.ATK_REMOVEROAD:
-			filename += "rr";
-			break;
-		case Card.CON_BUILDANYSTR:
-			filename += "bas";
-			break;
-		case Card.CON_UPGRADESTR:
-			filename += "us";
-			break;
-		case Card.CON_BUILDSTR_ETHIOPIA:
-			filename += "bs_eth";
-			break;
-		case Card.DEF_BUILDROAD:
-			filename += "br";
-			break;
-		case Card.DEF_BUILDWALL:
-			filename += "bw";
-			break;
-		case Card.DEF_DEFEND:
-			filename += "da";
-			break;
-		case Card.DEF_PICK2:
-			filename += "p2";
-			break;
-		}
-
-		filename += ".png";
-
-		URL urlCardImg = getClass().getResource("/img/" + filename);
-		return new ImageIcon(urlCardImg).getImage();
-	}
-
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		// draw background
@@ -207,19 +117,23 @@ public class BoardGui extends JPanel {
 	public static void main(String[] args) {
 		/*
 		// Testing on Console without GUI
-		Deck d = new Deck(Deck.ATK);
+		Deck d = new Deck(Deck.ATK,0,0);
 		Hand h = new Hand();
 		
-		System.out.println("---card delt");
+		System.out.println("---card delt to hand");
 		h.addCard(d.dealCard());
 		System.out.println("---cards in hand");
 		h.printHand();
-		System.out.println("---cards discarded");
-		d.printCardsDiscarded();
+		System.out.println("---cards drawn");
+		d.printCardsDrawn();
 		System.out.println("---cards remaining");
 		d.printCardsRemaining();
-		*/
+		System.out.println("---play card in hand");
+		h.removeCard(h.getCard(0));
+		System.out.println("---discard pile");
+
 		
+		*/
 		 
 		// GUI Testing
 		new BoardGui();

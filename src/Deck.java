@@ -11,11 +11,11 @@ public class Deck {
 	public final static int CON = 2;
 
     private Card[] deck; // contains all unused cards
+    private Card[] discard; // contains all used cards
     private int cardsDrawn; // Keeps track of the number of cards that have been dealt from the deck so far.
     private final int type;
     private int x;
     private int y;
-    private Image img;
    
     // creates a new shuffled deck of the given type
     public Deck(int theType, int xLoc, int yLoc) {
@@ -36,14 +36,7 @@ public class Deck {
 	            }
 	            for ( int k = 18; k < 20; k++ ) {
 	            	deck[k] = new Card(Card.ATK, Card.ATK_DOUBLE);	            	
-	            }
-	            
-	           
-	            
-	            // set the deck image which is just the card back
-	            URL urlDeckImg = getClass().getResource("/img/cardBack.png");
-	    		img = new ImageIcon(urlDeckImg).getImage();
-	    		
+	            }	           
 	    		break; 
 	    		
 	    	// ---- initializes the defense deck
@@ -96,7 +89,7 @@ public class Deck {
     	}    
     }
     
-    public void printCardsDiscarded() {
+    public void printCardsDrawn() {
     	for (int i = 0; i < cardsDrawn; i++) {
     		System.out.println(deck[i].getTypeAsString());
     	}    
@@ -132,7 +125,26 @@ public class Deck {
     	return y;
     }
     
+    /**
+     * Here we get the correct card back image based on this deck's type
+	 * Note that we are not saving the image into an instance variable to save memory by only loading the image file when we need to draw it
+     * @return
+     */
     public Image getImage() {
-    	return img;
+    	String filename = "";
+    	
+    	switch (this.type) {
+    		case (Deck.ATK):
+    			filename = "cardBack.png";
+    			break;
+    		case (Deck.DEF):
+    			filename = "cardBack.png";
+    			break;
+    		case (Deck.CON):
+    			filename = "cardBack.png";
+    			break;
+    	}
+        URL urlDeckImg = getClass().getResource("/img/" + filename);		
+    	return new ImageIcon(urlDeckImg).getImage();
     }
 }
