@@ -114,6 +114,7 @@ public class Deck {
              throw new IllegalStateException("No cards are left in the deck.");
     	 }
          cardsDrawn++;
+         System.out.println(deck[cardsDrawn - 1].getTypeAsString()); // DEBUG
          return deck[cardsDrawn - 1];
          // Programming note:  Cards are not literally removed from the array
          // that represents the deck.  We just keep track of how many cards
@@ -153,5 +154,13 @@ public class Deck {
     	}
         URL urlDeckImg = getClass().getResource("/img/" + filename);		
     	return new ImageIcon(urlDeckImg).getImage();
+    }
+    
+    public int getWidth() {
+    	return this.getImage().getWidth(null);
+    }
+    
+    public int getHeight() {
+    	return this.getImage().getHeight(null);
     }
 }

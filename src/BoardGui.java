@@ -58,7 +58,7 @@ public class BoardGui extends JPanel {
 		// ----
 
 		// add mouse listeners to enable drag and drop
-		SpacesMouseClickListener listener = new SpacesMouseClickListener(this.spaces, this);
+		MouseClickListener listener = new MouseClickListener(this.spaces, this.decks, this);
 		this.addMouseListener(listener);
 		this.addMouseMotionListener(listener);
 		
