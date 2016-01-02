@@ -5,11 +5,12 @@ import javax.swing.ImageIcon;
 
 public class Deck {
 	
-	// Deck Types
+	// Deck Type Constants
 	public final static int ATK = 0;
 	public final static int DEF = 1;
 	public final static int CON = 2;
 
+	// Instance variables
     private Card[] deck; // contains all unused cards
     private Card[] discard; // contains all used cards
     private int cardsDrawn; // Keeps track of the number of cards that have been dealt from the deck so far.
@@ -17,7 +18,13 @@ public class Deck {
     private int x;
     private int y;
    
-    // creates a new shuffled deck of the given type
+    /**
+     * Constructor for Deck
+     * creates a new shuffled deck of the given type
+     * @param theType
+     * @param xLoc
+     * @param yLoc
+     */
     public Deck(int theType, int xLoc, int yLoc) {
     	
     	if (theType != ATK && theType != DEF && theType != CON)

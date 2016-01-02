@@ -40,6 +40,7 @@ public class Card {
 	private final int subType;
 
 	/**
+	 * Constructor for Card
 	 * Creates a card with a specified type.
 	 * 
 	 * @throws IllegalArgumentException

@@ -7,7 +7,7 @@ public class Piece {
 	
 	public static final int COLOR_WHITE = 0;
 	public static final int COLOR_BLACK = 1;
-	public static final int COLOR_RED= 2;
+	public static final int COLOR_RED = 2;
 	public static final int COLOR_GREEN = 3;
 
 	public static final int TYPE_EMPIRE = 1;
@@ -15,11 +15,19 @@ public class Piece {
 	public static final int TYPE_STRONGHOLD = 3;
 	public static final int TYPE_WALL = 4;
 	
+	// Instance variables
 	private int color;
 	private int type;
 	private int x;
 	private int y;
 
+	/**
+	 * Constructor for Piece
+	 * @param myColor
+	 * @param myType
+	 * @param myX
+	 * @param myY
+	 */
 	public Piece(int myColor, int myType, int myX, int myY) {
 		this.color = myColor;
 		this.type = myType;

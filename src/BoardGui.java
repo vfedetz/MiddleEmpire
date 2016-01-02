@@ -17,15 +17,17 @@ public class BoardGui extends JPanel {
 
 	private static final long serialVersionUID = 3114147670071466558L;
 
+	// Board Constants
 	private static final int BOARD_START_X = 301;
 	private static final int BOARD_START_Y = 51;
-
 	private static final int TILE_OFFSET_X = 50;
 	private static final int TILE_OFFSET_Y = 50;
 
+	// Instance variables
 	private Image imgBackground;
-	private List<Piece> pieces = new ArrayList<Piece>(); // 0 = bottom, size-1 = top
+	private List<Piece> pieces = new ArrayList<Piece>();
 	private List<Deck> decks = new ArrayList<Deck>(); // should only ever be 3 decks
+	private List<Space> spaces = new ArrayList<Space>();
 
 	
 	public BoardGui() {
@@ -35,6 +37,12 @@ public class BoardGui extends JPanel {
 
 		// create and place decks
 		createAndAddDeck(Deck.ATK, 0, 0);
+		
+		// create spaces
+		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 0, BOARD_START_Y + TILE_OFFSET_Y * 0);
+		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 1, BOARD_START_Y + TILE_OFFSET_Y * 1);
+		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 2, BOARD_START_Y + TILE_OFFSET_Y * 2);
+		createAndAddSpace(Space.CITY, BOARD_START_X + TILE_OFFSET_X * 3, BOARD_START_Y + TILE_OFFSET_Y * 3);
 		
 		// create and place pieces
 		createAndAddPiece(Piece.COLOR_BLACK, Piece.TYPE_ROAD, BOARD_START_X + TILE_OFFSET_X * 0,
@@ -47,13 +55,11 @@ public class BoardGui extends JPanel {
 				BOARD_START_Y + TILE_OFFSET_Y * 0);
 
 		// add mouse listeners to enable drag and drop
-		//
 		PiecesDragAndDropListener listener = new PiecesDragAndDropListener(this.pieces, this);
 		this.addMouseListener(listener);
 		this.addMouseMotionListener(listener);
 
 		// create application frame and set visible
-		//
 		JFrame f = new JFrame();
 		f.setVisible(true);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,6 +89,11 @@ public class BoardGui extends JPanel {
 	private void createAndAddDeck(int type, int x, int y) {
 		Deck deck = new Deck(Deck.ATK, x, y);
 		this.decks.add(deck);
+	}
+	
+	private void createAndAddSpace(int type, int x, int y) {
+		Space space = new Space(Space.CITY, x, y);
+		this.spaces.add(space);
 	}
 
 	/**

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 public class Hand {
 
+	// Instance variables
     private ArrayList<Card> hand;   // The cards in the hand.
 
     /**
+     * Constructor for Hand
      * Create a hand that is initially empty.
      */
     public Hand() {
