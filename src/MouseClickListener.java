@@ -8,7 +8,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener {
 	// Instance variables
 	private List<Space> spaces;
 	private List<Deck> decks;
-	private BoardGui boardGui;	
+	private BoardGui boardGui;
 	private Space selectedSpace = null; // contained the currently selected space
 	
 
@@ -87,6 +87,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener {
 		else { 
 			// else we mark this space as currently selected
 			selectedSpace = space;
+			
 		}
 	}
 	
@@ -97,7 +98,7 @@ public class MouseClickListener implements MouseListener, MouseMotionListener {
 	 * @param x
 	 * @param y
 	 */
-	private void deckClicked(Deck deck, int x, int y) {
+	public void deckClicked(Deck deck, int x, int y) {
 		deck.dealCard();
 	}
 

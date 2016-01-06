@@ -16,6 +16,18 @@ import javax.swing.JPanel;
 public class BoardGui extends JPanel {
 
 	private static final long serialVersionUID = 3114147670071466558L;
+	
+	// Color Constants
+	public static final int COLOR_WHITE = 0;
+	public static final int COLOR_BLACK = 1;
+	public static final int COLOR_RED = 2;
+	public static final int COLOR_GREEN = 3;
+
+	// Piece Type Constants
+	public static final int TYPE_EMPIRE = 1;
+	public static final int TYPE_ROAD = 2;
+	public static final int TYPE_STRONGHOLD = 3;
+	public static final int TYPE_WALL = 4;
 
 	// Board Constants
 	private static final int BOARD_START_X = 301;
@@ -25,6 +37,7 @@ public class BoardGui extends JPanel {
 	private Image imgBackground;
 	private List<Deck> decks = new ArrayList<Deck>(); // should only ever be 3 decks
 	private List<Space> spaces = new ArrayList<Space>();
+	private List<Player> players = new ArrayList<Player>();
 
 	/**
 	 * Constructor for the BoardGui class
@@ -37,6 +50,13 @@ public class BoardGui extends JPanel {
 
 		// ----
 		
+		// create Players
+		createAndAddPlayer(Player.COLOR_BLACK);
+		
+		// ----
+		
+		// ----
+				
 		// create and place decks
 		createAndAddDeck(Deck.ATK, 0, 0);
 		
@@ -53,7 +73,7 @@ public class BoardGui extends JPanel {
 		// ----
 		
 		// create and place pieces
-		createAndAddPiece(Piece.COLOR_BLACK, Piece.TYPE_ROAD, spaces.get(0));
+		createAndAddPiece(COLOR_BLACK, TYPE_ROAD, spaces.get(0));
 
 		// ----
 
@@ -73,18 +93,6 @@ public class BoardGui extends JPanel {
 		f.setSize(this.imgBackground.getWidth(null), this.imgBackground.getHeight(null));
 	}
 
-	/**
-	 * create a game piece
-	 * 
-	 * @param color
-	 *            color constant
-	 * @param type
-	 *            type constant
-	 * @param x
-	 *            x position of upper left corner
-	 * @param y
-	 *            y position of upper left corner
-	 */
 	private void createAndAddPiece(int color, int type, Space space) {
 		Piece piece = new Piece(color, type, space);
 		space.addPiece(piece);
@@ -100,11 +108,17 @@ public class BoardGui extends JPanel {
 		this.spaces.add(space);
 	}
 	
+	private void createAndAddPlayer(int color) {
+		Player p = new Player(color);
+	}
+	
 	public void printSpaces() {
 		for (Space space : this.spaces) {
 			space.printSpace();
 		}
 	}
+	
+
 
 	
 	@Override

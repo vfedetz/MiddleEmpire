@@ -5,11 +5,13 @@ import javax.swing.ImageIcon;
 
 public class Piece {
 	
+	// Piece color constants
 	public static final int COLOR_WHITE = 0;
 	public static final int COLOR_BLACK = 1;
 	public static final int COLOR_RED = 2;
 	public static final int COLOR_GREEN = 3;
 
+	// Piece type constants
 	public static final int TYPE_EMPIRE = 1;
 	public static final int TYPE_ROAD = 2;
 	public static final int TYPE_STRONGHOLD = 3;
@@ -91,6 +93,20 @@ public class Piece {
 	
 	public int getType() {
 		return type;
+	}
+	
+	public String getTypeAsString() {
+		switch (this.type) {
+		case 1:
+			return "Empire";
+		case 2:
+			return "Road";
+		case 3:
+			return "Stronghold";
+		case 4:
+			return "Wall";
+		}
+		return "Error in Piece.toString()";
 	}
 
 }

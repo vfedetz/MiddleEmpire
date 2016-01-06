@@ -47,6 +47,7 @@ public class Card {
 	 *             if the parameter values are not in the permissible ranges
 	 */
 	public Card(int theType, int theSubType) {
+		// input validations...
 		if (theType != ATK && theType != DEF && theType != CON)
 			throw new IllegalArgumentException("Illegal card type");
 		if (theSubType != ATK_OPPONENT && theSubType != ATK_DOUBLE && theSubType != ATK_REMOVEROAD
@@ -54,8 +55,10 @@ public class Card {
 				&& theSubType != DEF_PICK2 && theSubType != CON_BUILDANYSTR && theSubType != CON_UPGRADESTR
 				&& theSubType != CON_BUILDSTR_ETHIOPIA)
 			throw new IllegalArgumentException("Illegal card subType");
-		subType = theSubType;
-		type = theType;
+		
+		// initialize instance variables
+		this.subType = theSubType;
+		this.type = theType;
 	}
 
 	/**

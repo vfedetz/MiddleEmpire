@@ -53,6 +53,7 @@ public class Space {
 	 */
 	public void addPiece(Piece p) {
 		this.piece = p;
+		System.out.println("DEBUG: " + p.getTypeAsString() + " Piece placed."); // DEBUG
 	}
 	
 	/**
